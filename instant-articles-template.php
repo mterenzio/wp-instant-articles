@@ -84,7 +84,7 @@ do_action( 'rss_tag_pre', 'rss2' );
       <!-- Body text for your article -->
       <p><?php echo $content; ?></p> 
 
-      <!-- A video within your article -->
+	  <!-- Image  -->	
 	 <?php
      if( has_post_thumbnail( $post->ID ) ) {
          echo '<figure>' . get_the_post_thumbnail( $post->ID, 'thumbnail' ) . '</figure>';
