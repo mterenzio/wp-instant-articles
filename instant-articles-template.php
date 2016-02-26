@@ -64,39 +64,31 @@ do_action( 'rss_tag_pre', 'rss2' );
 
         <!-- The authors of your article -->
         <address>
-          <a rel="facebook" href="http://facebook.com/brandon.diamond">Brandon Diamond</a>
-          Brandon is a avid zombie hunter.
+          <a rel="facebook" href="<?php the_author_link(); ?>"><?php the_author() ?></a>
+          <?php the_author_meta( 'description'); ?> 
         </address>
 
         <!-- The cover image shown inside your article --> 
         <figure>
-          <img src="http://mydomain.com/path/to/img.jpg" />
-          <figcaption>This image is amazing</figcaption>
+	 <?php
+     if( has_post_thumbnail( $post->ID ) ) {
+         echo '<figure>' . get_the_post_thumbnail( $post->ID, 'thumbnail' ) . '</figure>';
+     }
+	?>
         </figure>   
 
       </header>
 
       <!-- Article body goes here -->
-      
+
+      <!-- Body text for your article -->
       <p><?php echo $content; ?></p> 
 
-      <!-- images BROKEN?? -->
-	 <?php if ( $images = get_posts(array(
-	  		'post_parent' => $post->ID,
-	  		'post_type' => 'attachment',
-	  		'numberposts' => -1,
-	  		'post_mime_type' => 'image',)))
-	  	{
-	  		foreach( $images as $image ) {
-	  			$attachmenturl=wp_get_attachment_url($image->ID);
-	  			$attachmentimage=wp_get_attachment_image_src( $image->ID, full );
-	  			$imageDescription = apply_filters( 'the_description' , $image->post_content );
-	  			$imageTitle = apply_filters( 'the_title' , $image->post_title );
-				echo '<figure>';
-	  		echo '<img src="' . $attachmentimage[0] . '" alt=""  />';
-			echo '</figure>';
-		}
-	  }
+      <!-- A video within your article -->
+	 <?php
+     if( has_post_thumbnail( $post->ID ) ) {
+         echo '<figure>' . get_the_post_thumbnail( $post->ID, 'thumbnail' ) . '</figure>';
+     }
 	?>
 
     </article>
